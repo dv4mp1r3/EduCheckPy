@@ -1,4 +1,5 @@
 source "https://rubygems.org"
 
-gem "cucumber", "~> 8.0"
-gem "aruba",    "~> 2.2"
+# Берём последнюю 9.x-линию, совместимую с Aruba 2.3
+gem "cucumber", "~> 9.2"  
+gem "aruba",    "~> 2.3"  
