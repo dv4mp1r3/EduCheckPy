@@ -1,3 +1,4 @@
+# src/app.py
 #!/usr/bin/env python3
 import argparse
 
@@ -5,14 +6,14 @@ def greet(args):
     """Печатает приветствие."""
     print(f"Hello, {args.name}")
 
-
 def main():
     parser = argparse.ArgumentParser(prog="app.py")
-    subparsers = parser.add_subparsers(dest="command")
+    # Добавлено подчеркивание, чтобы избежать предупреждения W0612
+    _subparsers = parser.add_subparsers(dest="command")
 
     # Команда greet
-    greet_parser = subparsers.add_parser("greet", help="Greet someone")
-    greet_parser.add_argument(
+    _greet_parser = _subparsers.add_parser("greet", help="Greet someone")
+    _greet_parser.add_argument(
         "--name", required=True, help="Name to greet"
     )
 
@@ -21,7 +22,6 @@ def main():
         greet(args)
     else:
         parser.print_help()
-
 
 if __name__ == "__main__":
     main()
