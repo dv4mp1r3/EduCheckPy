@@ -5,9 +5,11 @@ Feature: CLI app behavior
     Given a blank slate
 
   Scenario: No arguments shows help
-    When I run `python src/app.py`
-    Then the output should contain "usage:"
+    When I run `python3 src/app.py`
+    Then the exit status should be 0
+    And the output should contain "usage:"
 
   Scenario: Greet command
-    When I run `python src/app.py greet --name Alice`
-    Then the output should contain "Hello, Alice"
+    When I run `python3 src/app.py greet --name Alice`
+    Then the exit status should be 0
+    And the output should contain "Hello, Alice"
