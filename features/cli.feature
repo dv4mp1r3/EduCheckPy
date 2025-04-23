@@ -1,4 +1,3 @@
-# language: ru
 Feature: CLI app behavior
   Проверяем базовое поведение командной строки
 
