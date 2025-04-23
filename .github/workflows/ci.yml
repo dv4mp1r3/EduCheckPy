@@ -23,26 +23,42 @@ jobs:
         run: |
           pylint src || pylint-exit $?
 
-  cli_tests:
+    cli_tests:
     name: BDD CLI tests (Cucumber+Aruba)
     needs: lint
     runs-on: ubuntu-latest
+    env:
+      LANG: C.UTF-8             # задаём UTF-8 для Ruby и Gherkin
+      LC_ALL: C.UTF-8
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
+
       - name: Install Python deps
         run: pip install -r requirements.txt
-      - name: Set up Ruby for Aruba
+
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
-      - name: Install Cucumber and Aruba
-        run: gem install cucumber aruba
+
+      - name: Create Gemfile
+        run: |
+          cat << 'EOF' > Gemfile
+          source "https://rubygems.org"
+          gem "cucumber", "~> 8.2"
+          gem "aruba",    "~> 2.2"
+          EOF
+
+      - name: Bundle install
+        run: bundle install --jobs 4 --retry 3
+
       - name: Run Cucumber features
-        run: cucumber --tags ~@wip
+        run: bundle exec cucumber --tags ~@wip
 
   stress:
     name: Stress tests
