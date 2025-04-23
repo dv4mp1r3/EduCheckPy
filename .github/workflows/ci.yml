@@ -46,8 +46,8 @@ jobs:
         run: |
           cat << 'EOF' > Gemfile
           source "https://rubygems.org"
-          gem "cucumber", "~> 8.2"
-          gem "aruba",    "~> 2.2"
+          gem "cucumber", "~> 9.2"
+          gem "aruba",    "~> 2.3"
           EOF
       - name: Bundle install
         run: bundle install --jobs 4 --retry 3
