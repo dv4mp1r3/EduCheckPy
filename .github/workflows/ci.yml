@@ -52,7 +52,7 @@ jobs:
       - name: Bundle install
         run: bundle install --jobs 4 --retry 3
       - name: Run Cucumber features
-        run: bundle exec cucumber --tags ~@wip
+        run: bundle exec cucumber --tags "not @wip"
 
   stress:
     name: Stress tests
