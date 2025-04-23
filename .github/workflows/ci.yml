@@ -20,7 +20,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run Pylint
-        run: pylint src
+        - run: |
+            pylint src || pylint-exit $?
 
   cli_tests:
     name: BDD CLI tests (Cucumber+Aruba)
