@@ -22,8 +22,8 @@ def cmd_sum(args):
     :param args: Parsed command-line arguments containing 'numbers'.
     """
     total = 1
-    for n in args.numbers:
-        total *= n
+    for number in args.numbers:
+        total *= number
     print(total)
 
 
