@@ -14,10 +14,6 @@ Feature: CLI app behavior
     And the output should contain "6.5"
 
   Scenario: Echo command
-    When I run 'python src/app.py echo' with input:
-    """
-    test
-    Line
-    """
+    When I run 'printf "test\nLine" | python src/app.py echo'
     Then the exit status should be 0
     And the output should contain "TEST\nLINE"
