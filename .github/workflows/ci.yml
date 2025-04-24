@@ -62,6 +62,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run stress tests
         run: python tests/stress_test.py
+    
+    name: Stress stdin
+    needs: stress
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run stdin stress tests
+        run: python tests/stress_stdin.py
 
   valgrind:
     name: Memory check with Valgrind
@@ -78,3 +86,15 @@ jobs:
         with:
           binary_path: "python"
           binary_args: "src/app.py greet --name CI"
+
+  profiling:
+    name: Time profiling
+    needs: valgrind                    # ← дождётся окончания Valgrind
+    runs-on: ubuntu-latest             # ← тот же раннер
+    steps:
+      - uses: actions/checkout@v4
+      - name: Profile execution time
+        run: |
+          /usr/bin/time -f "real %e user %U sys %S" \
+            python src/app.py greet --name CI 2> time.log
+          cat time.log
