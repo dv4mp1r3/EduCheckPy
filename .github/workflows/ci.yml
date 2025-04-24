@@ -5,6 +5,7 @@ on:
   pull_request: {}
 
 jobs:
+  # 1. Lint — базовая проверка, нужна всем остальным
   lint:
     name: Lint with Pylint
     runs-on: ubuntu-latest
@@ -22,6 +23,7 @@ jobs:
       - name: Run Pylint
         run: pylint src
 
+  # 2. CLI tests — после lint
   cli_tests:
     name: BDD CLI tests (Cucumber+Aruba)
     needs: lint
@@ -53,11 +55,12 @@ jobs:
       - name: Run Cucumber features
         run: |
           bundle exec cucumber \
-          --require features \
-          --require aruba/cucumber \
-          --tags "not @wip" \
-          --format pretty
+            --require features \
+            --require aruba/cucumber \
+            --tags "not @wip" \
+            --format pretty
 
+  # 3a. Stress tests — после cli_tests
   stress:
     name: Stress tests
     needs: cli_tests
@@ -73,18 +76,10 @@ jobs:
       - name: Run stress tests
         run: python -m pytest tests/stress_test.py
 
-  stdin_stress:
-    name: Stress stdin
-    needs: stress
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run stdin stress tests
-        run: python tests/stress_stdin.py
-
+  # 3b. Memory check — тоже после cli_tests, параллельно stress
   valgrind:
     name: Memory check with Valgrind
-    needs: stdin_stress
+    needs: cli_tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -98,13 +93,14 @@ jobs:
           binary_path: "python"
           binary_args: "src/app.py greet --name CI"
 
+  # 3c. Profiling — тоже после cli_tests, параллельно stress и valgrind
   profiling:
     name: Time profiling
-    needs: valgrind
+    needs: cli_tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        job: 
+        job:
           - { name: greet, cmd: "python src/app.py greet --name CI" }
           - { name: sum,   cmd: "python src/app.py sum 1 2 3.5" }
           - { name: echo,  cmd: "bash -c 'printf \"test\nLine\" | python src/app.py echo'" }
@@ -115,3 +111,13 @@ jobs:
           /usr/bin/time -f "real %e user %U sys %S" \
             bash -c "${{ matrix.job.cmd }}" 2> time-${{ matrix.job.name }}.log
           cat time-${{ matrix.job.name }}.log
+
+  # 4. stdin_stress — только после stress
+  stdin_stress:
+    name: Stress stdin
+    needs: stress
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run stdin stress tests
+        run: python tests/stress_stdin.py
