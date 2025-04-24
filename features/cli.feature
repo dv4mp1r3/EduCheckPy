@@ -17,11 +17,3 @@ Feature: CLI app behavior
     When I run 'printf "test\nLine" | python src/app.py echo'
     Then the exit status should be 0
     And the output should contain "TEST\nLINE"
-
-  Scenario: Echo command
-  When I run "python src/app.py echo" with input:
-    """
-    test
-    Line
-    """
-  Then the output should contain "TEST\nLINE"
