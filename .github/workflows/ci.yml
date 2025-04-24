@@ -62,7 +62,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run stress tests
         run: python tests/stress_test.py
-    
+  
+  stdin_stress:
     name: Stress stdin
     needs: stress
     runs-on: ubuntu-latest
@@ -73,7 +74,7 @@ jobs:
 
   valgrind:
     name: Memory check with Valgrind
-    needs: stress
+    needs: stdin_stress
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
