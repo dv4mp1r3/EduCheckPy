@@ -5,7 +5,6 @@ summing numbers, and echoing input in uppercase.
 """
 import argparse
 import sys
-import time
 
 def greet(args):
     """
@@ -33,9 +32,9 @@ def cmd_echo(_args):
     :param args: Parsed command-line arguments (unused).
     """
     data = sys.stdin.read()
+    if data.endswith("\n"):
+        data = data[:-1]
     print(data.upper(), end="")
-
-    time.sleep(0.2)
 
 
 def main():
