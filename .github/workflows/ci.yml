@@ -51,7 +51,11 @@ jobs:
       - name: Bundle install
         run: bundle install --jobs 4 --retry 3
       - name: Run Cucumber features
-        run: bundle exec cucumber --tags "not @wip"
+        run: bundle exec cucumber \
+          --require features \
+          --require aruba/cucumber \
+          --tags "not @wip" \
+          --format pretty
 
   stress:
     name: Stress tests
