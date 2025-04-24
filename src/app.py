@@ -5,7 +5,7 @@ summing numbers, and echoing input in uppercase.
 """
 import argparse
 import sys
-import ctypes
+import time
 
 def greet(args):
     """
@@ -23,8 +23,6 @@ def cmd_sum(args):
     :param args: Parsed command-line arguments containing 'numbers'.
     """
     total = sum(args.numbers)
-    buf = ctypes.create_string_buffer(4)
-    ctypes.memmove(ctypes.addressof(buf)+8, b"ABCD", 4)
     print(total)
 
 
@@ -35,6 +33,7 @@ def cmd_echo(_args):
     :param args: Parsed command-line arguments (unused).
     """
     data = sys.stdin.read()
+    time.sleep(1.5)
     print(data.upper(), end="")
 
 

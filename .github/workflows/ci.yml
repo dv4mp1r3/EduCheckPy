@@ -100,8 +100,8 @@ jobs:
 
   profiling:
     name: Time profiling
-    needs: valgrind                    # ← дождётся окончания Valgrind
-    runs-on: ubuntu-latest             # ← тот же раннер
+    needs: valgrind
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Profile execution time
