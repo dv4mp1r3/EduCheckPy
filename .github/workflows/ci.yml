@@ -102,10 +102,18 @@ jobs:
     name: Time profiling
     needs: valgrind
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cmd: [
+          "python src/app.py greet --name CI",
+          "python src/app.py sum 1 2 3.5",
+          "printf \"test\nLine\" | python src/app.py echo"
+        ]
     steps:
       - uses: actions/checkout@v4
-      - name: Profile execution time
+
+      - name: Profile execution time for ${{ matrix.cmd }}
         run: |
           /usr/bin/time -f "real %e user %U sys %S" \
-            python src/app.py greet --name CI 2> time.log
-          cat time.log
+            sh -c "${{ matrix.cmd }}" 2> time-${{ matrix.job }}.log
+          cat time-${{ matrix.job }}.log
