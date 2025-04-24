@@ -104,16 +104,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        name: [
+          "greet",
+          "sum",
+          "echo"
+        ]
         cmd: [
           "python src/app.py greet --name CI",
           "python src/app.py sum 1 2 3.5",
-          "printf \"test\nLine\" | python src/app.py echo"
+          "bash -c 'printf \"test\\nLine\" | python src/app.py echo'"
         ]
     steps:
       - uses: actions/checkout@v4
 
-      - name: Profile execution time for ${{ matrix.cmd }}
+      - name: Profile execution time for ${{ matrix.name }}
         run: |
           /usr/bin/time -f "real %e user %U sys %S" \
-            sh -c "${{ matrix.cmd }}" 2> time-${{ matrix.job }}.log
-          cat time-${{ matrix.job }}.log
+            bash -c "${{ matrix.cmd }}" 2> time-${{ matrix.name }}.log
+          cat time-${{ matrix.name }}.log
