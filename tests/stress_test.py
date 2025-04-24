@@ -11,6 +11,7 @@ def test_sum_direct():
     )
     assert result.returncode == 0
     assert result.stdout.strip() == "10.0"
+    print("Sum tests pass")
 
 def test_echo_command():
     input_text = "test\nLine"
