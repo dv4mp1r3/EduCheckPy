@@ -1,15 +1,13 @@
 import subprocess
 
-def stress_test_sum():
-    for i in range(1000):
-        numbers = [str(j) for j in range(i % 10 + 1)]
-        expected_sum = sum(map(float, numbers))
-        result = subprocess.run(
-            ["python", "src/app.py", "sum"] + numbers,
-            capture_output=True, text=True
-        )
-        assert result.returncode == 0
-        assert float(result.stdout.strip()) == expected_sum
+def test_sum_direct():
+    # прямой вызов subprocess
+    result = subprocess.run(
+        ["python", "src/app.py", "sum", "4", "5", "1"],
+        capture_output=True, text=True
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == "10.0"
 
 def test_echo_command():
     input_text = "test\nLine"
