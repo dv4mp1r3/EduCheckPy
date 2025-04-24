@@ -5,6 +5,7 @@ summing numbers, and echoing input in uppercase.
 """
 import argparse
 import sys
+import time  
 
 def greet(args):
     """
@@ -33,7 +34,7 @@ def cmd_echo(_args):
     """
     data = sys.stdin.read()
     print(data.upper(), end="")
-    import time  
+
     time.sleep(0.2)
 
 
