@@ -25,7 +25,7 @@ def cmd_sum(args):
     print(total)
 
 
-def cmd_echo():
+def cmd_echo(_args):
     """
     Read from stdin and print in uppercase.
 
