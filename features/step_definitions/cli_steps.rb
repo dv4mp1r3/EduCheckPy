@@ -4,5 +4,14 @@ require 'aruba/cucumber'
 Given('a blank slate') { }
 
 When('I run {string}') do |cmd|
-  run_command_and_stop(cmd, exit_timeout: 10)  # встроенный запуск команды
+  # Заменяем printf на встроенный метод Aruba для ввода
+  cmd.gsub!(/printf\s+"([^"]+)"/, 'echo -e "\1"')
+  run_command_and_stop(cmd, exit_timeout: 15)
+end
+
+When('I run {string} with input:') do |cmd, input|
+  # Альтернативный шаг для передачи многострочного ввода
+  run_command_and_stop(cmd, exit_timeout: 15) do |process|
+    process.write(input)
+  end
 end
