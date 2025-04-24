@@ -63,17 +63,16 @@ jobs:
     needs: cli_tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
-      - name: Install Python deps
+          python-version: "3.10"
+      - name: Install dependencies
         run: pip install -r requirements.txt
-        
-      - uses: actions/checkout@v4
       - name: Run stress tests
-        run: python -m pytest tests/stress_test.py
-        
+        run: python tests/stress_test.py
+
   stdin_stress:
     name: Stress stdin
     needs: stress
