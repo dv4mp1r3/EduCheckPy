@@ -33,6 +33,11 @@ jobs:
       LC_ALL: C.UTF-8
     steps:
       - uses: actions/checkout@v4
+      - name: Debug working directory
+        run: |
+          pwd
+          ls -la
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
