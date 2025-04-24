@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-import statistics
 
 def greet(args):
     print(f"Hello, {args.name}")
@@ -11,7 +10,7 @@ def cmd_sum(args):
     total = sum(args.numbers)
     print(total)
 
-def cmd_echo(args):
+def cmd_echo():
     # читает stdin и выводит в upper-case
     data = sys.stdin.read()
     print(data.upper(), end="")
