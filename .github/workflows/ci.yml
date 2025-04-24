@@ -64,12 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
       - name: Run stress tests
-        run: python tests/stress_test.py
+        run: python -m pytest tests/stress_test.py
         
   stdin_stress:
     name: Stress stdin
