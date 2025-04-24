@@ -5,7 +5,7 @@ summing numbers, and echoing input in uppercase.
 """
 import argparse
 import sys
-import time  
+import time
 
 def greet(args):
     """
