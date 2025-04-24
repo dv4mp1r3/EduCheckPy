@@ -49,7 +49,7 @@ def main():
     parser_greet.add_argument(
         "--name", required=True, help="Name of the person to greet"
     )
-    parser_greet.set_defaults(func=greet)
+
 
     # sum command
     parser_sum = subparsers.add_parser(
