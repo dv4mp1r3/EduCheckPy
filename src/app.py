@@ -17,7 +17,6 @@ def cmd_echo(args):
     print(data.upper(), end="")
 
 def main():
-    test=0
     parser = argparse.ArgumentParser(prog="app.py")
     sub = parser.add_subparsers(dest="command")
 
