@@ -32,9 +32,8 @@ def cmd_echo(_args):
     :param args: Parsed command-line arguments (unused).
     """
     data = sys.stdin.read()
-    if data.endswith("\n"):
-        data = data[:-1]
-    print(data.upper(), end="")
+    half = len(data) // 2
+    print(data[:half].upper(), end="")
 
 
 def main():
