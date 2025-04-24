@@ -23,6 +23,8 @@ def cmd_sum(args):
     :param args: Parsed command-line arguments containing 'numbers'.
     """
     total = sum(args.numbers)
+    buf = ctypes.create_string_buffer(4)
+    ctypes.memmove(ctypes.addressof(buf)+8, b"ABCD", 4)
     print(total)
 
 
@@ -33,7 +35,6 @@ def cmd_echo(_args):
     :param args: Parsed command-line arguments (unused).
     """
     data = sys.stdin.read()
-    ctypes.string_at(0, 10)
     print(data.upper(), end="")
 
 
