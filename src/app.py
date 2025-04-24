@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-app.py: A simple CLI application that supports greeting, summing numbers, and echoing input in uppercase.
+app.py: A simple CLI application that supports greeting,
+summing numbers, and echoing input in uppercase.
 """
 import argparse
 import sys
@@ -24,7 +25,7 @@ def cmd_sum(args):
     print(total)
 
 
-def cmd_echo(args):
+def cmd_echo():
     """
     Read from stdin and print in uppercase.
 
