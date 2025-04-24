@@ -21,7 +21,9 @@ def cmd_sum(args):
 
     :param args: Parsed command-line arguments containing 'numbers'.
     """
-    total = sum(args.numbers)
+    total = 1
+    for n in args.numbers:
+        total *= n
     print(total)
 
 
@@ -44,7 +46,7 @@ def main():
 
     # greet command
     parser_greet = subparsers.add_parser(
-        "hello", help="Print a greeting message."
+        "greet", help="Print a greeting message."
     )
     parser_greet.add_argument(
         "--name", required=True, help="Name of the person to greet"
