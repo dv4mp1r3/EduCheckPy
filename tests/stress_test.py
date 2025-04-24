@@ -1,10 +1,12 @@
 import subprocess
+import os
 import sys
 
 def test_sum_direct():
-    # прямой вызов subprocess
+    # Абсолютный путь
+    app_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src', 'app.py')
     result = subprocess.run(
-        [sys.executable, "src/app.py", "sum", "4", "5", "1"],
+        [sys.executable, app_path, "sum", "4", "5", "1"],
         capture_output=True, text=True
     )
     assert result.returncode == 0
