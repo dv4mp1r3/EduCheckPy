@@ -8,3 +8,21 @@ def test_sum_direct():
     )
     assert result.returncode == 0
     assert result.stdout.strip() == "10.0"
+
+def test_echo_command():
+    input_text = "test\nLine"
+    result = subprocess.run(
+        ["python", "src/app.py", "echo"],
+        input=input_text,
+        capture_output=True, text=True
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == "TEST\nLINE"
+
+def test_greet_command():
+    result = subprocess.run(
+        ["python", "src/app.py", "greet", "--name", "Alice"],
+        capture_output=True, text=True
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == "Hello, Alice"
