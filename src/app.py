@@ -44,12 +44,12 @@ def main():
 
     # greet command
     parser_greet = subparsers.add_parser(
-        "greet", help="Print a greeting message."
+        "hello", help="Print a greeting message."
     )
     parser_greet.add_argument(
         "--name", required=True, help="Name of the person to greet"
     )
-
+    parser_greet.set_defaults(func=greet)
 
     # sum command
     parser_sum = subparsers.add_parser(
