@@ -25,6 +25,20 @@ jobs:
       - name: Run Pylint
         run: pylint src
 
+  import_sort:
+    name: Check import sorting with µsort
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install µsort
+        run: pip install usort>=0.14.0
+      - name: Run usort check
+        run: usort check src/
+
   # 2. CLI tests — после lint
   cli_tests:
     name: BDD CLI tests (Cucumber+Aruba)
