@@ -3,8 +3,9 @@
 app.py: A simple CLI application that supports greeting,
 summing numbers, and echoing input in uppercase.
 """
-import argparse
 import sys
+import argparse
+
 
 def greet(args):
     """
