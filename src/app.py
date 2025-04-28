@@ -12,7 +12,7 @@ def greet(args):
 
     :param args: Parsed command-line arguments containing 'name'.
     """
-    print(f"Hello, {args.name}")
+    sys.stdout.write(f"Hello, {args.name}\n")
 
 
 def cmd_sum(args):
@@ -22,7 +22,7 @@ def cmd_sum(args):
     :param args: Parsed command-line arguments containing 'numbers'.
     """
     total = sum(args.numbers)
-    print(total)
+    sys.stdout.write(f"{total}\n")
 
 
 def cmd_echo(_args):
@@ -32,7 +32,7 @@ def cmd_echo(_args):
     :param args: Parsed command-line arguments (unused).
     """
     data = sys.stdin.read()
-    print(data.upper(), end="")
+    sys.stdout.write(data.upper())
 
 
 def main():
