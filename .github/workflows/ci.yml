@@ -27,6 +27,7 @@ jobs:
 
   import_sort:
     name: Check import sorting with µsort
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
