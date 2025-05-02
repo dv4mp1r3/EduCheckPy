@@ -1,4 +1,5 @@
 import sys
+# comment
 
 
 def foo(n: int) -> int:
